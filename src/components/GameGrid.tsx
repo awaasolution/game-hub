@@ -1,22 +1,21 @@
-import { Image, Text } from "@chakra-ui/react";
+import { Image, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
+import GameCard from "./GameCard";
 
 const GameGrid = () => {
   const { error, games } = useGames();
   console.log("games");
   return (
     <>
-      <Text>{error}</Text>
-      <ul>
-        {error ||
-          games.map((game) => (
-            <li key={game.id}>
-              <Text>{game.name}</Text>
-              <Text>{game.id}</Text>
-              <Image src={game.background_image} />
-            </li>
-          ))}
-      </ul>
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        padding={10}
+        spacing={10}
+      >
+        {games.map((game) => (
+          <GameCard key={game.id} game={game} />
+        ))}
+      </SimpleGrid>
     </>
   );
 };
